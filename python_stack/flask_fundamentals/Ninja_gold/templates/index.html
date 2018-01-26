@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset= "utf-8">
+        <title>Ninja Gold</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ninjagold.css') }}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Your Gold {{session['gold']}}</h1>
+            <div id="collect">
+                <div class="sites">
+                    <h2>Farm</h2>
+                    <p>(earns 10-20 golds)</p>
+                    <form action="/process_money" method="POST">
+                        <input type="hidden" name="building" value="Farm">
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+                <div class="sites">
+                    <h2>Cave</h2>
+                    <p>(earns 5-10 golds)</p>
+                    <form action='/process_money' method='POST'>
+                        <input type="hidden" name="building" value="Cave">
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+                <div class="sites">
+                    <h2>House</h2>
+                    <p>(earns 2-5 golds)</p>
+                    <form action='/process_money' method='POST'>
+                        <input type="hidden" name="building" value="House">
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+                <div class="sites">
+                    <h2>Casino</h2>
+                    <p>(earns/takes 0-50 golds)</p>
+                    <form action='/process_money' method='POST'>
+                        <input type="hidden" name="building" value="Casino">
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+            </div>
+            <div id="activity">
+                <h2>Activities:</h2>
+                    {% for activity in session['activities'] %}
+                        <p>{{activity}}</p>
+                    {% endfor %}
+            </div>
+        </div>
+    </body>
+
+</html>

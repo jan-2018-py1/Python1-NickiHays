@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Great Number Game</title>
+    </head>
+    <body>
+        <h1>Welcom to the Great Number Game!</h1>
+        <h2>I am thinking of a number between 1 and 100</h2>
+        <h2>Take a guess!</h2>
+        <!-- <p>Random num is {{session['myNum']}}</p> -->
+        <form action='/process' method='POST'>
+            <input type='text' name='guess'>
+            <input type='submit' value='Submit'>
+        </form>
+    
+    </body>
+
+</html>

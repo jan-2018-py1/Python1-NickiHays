@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Please Complete</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}        
+        <form action='/results' method='POST'>
+            Your Name: <input type='text' name='name'>
+            Dojo Location: <input type='text' name='location'>
+            Favorite Language: <input type='text' name='favelang'>
+            Comment (optional): <textarea name="comment"></textarea>
+            <input type='submit' value='Submit'>
+        </form>
+    </body>
+
+</html>

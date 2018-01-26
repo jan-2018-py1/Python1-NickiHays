@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset="utf=8">
+        <title>Great Number Game</title>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h1>Welcom to the Great Number Game!</h1>
+            <h2>I am thinking of a number between 1 and 100</h2>
+            <h2>Take a guess!</h2>
+            <!-- <p>Random num is {{session['myNum']}}</p> -->
+            <div id='response'>
+                {% if session['guess'] > session['myNum'] %}
+                    <div id='high'>
+                        <h3>Too high!</h3>
+                        <form action='/process' method='POST'>
+                            <input type='text' name='guess'>
+                            <input type='submit' value='Submit'>
+                        </form>
+                    </div>
+                {% elif session['guess'] < session['myNum'] %}
+                    <div id='low'>
+                        <h3 id='low'>Too low!</h3>
+                        <form action='/process' method='POST'>
+                            <input type='text' name='guess'>
+                            <input type='submit' value='Submit'>
+                        </form>
+                    </div>
+                {% elif session['guess'] == session['myNum'] %}
+                    <div id='correct'>
+                        <h3>{{session['guess']}} was the number!</h3>
+                        <form action='/reset' method='POST'>
+                            <input type='submit' value='Play again!'>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            <form action='/reset' method='POST'>
+                <input type='submit' value='Reset'>
+            </form>
+        </div>
+    </body>
+
+</html>

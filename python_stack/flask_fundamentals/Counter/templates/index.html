@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Counter</h1>
+        <h2>{{session['count']}} times</h2>
+        <form action='/add' method='POST'>
+            <input type='submit' value='Add 2'>
+        </form>
+        <form action='/reset' method='POST'>
+            <input type='submit' value='reset'>
+        </form>
+    </body>
+
+</html>

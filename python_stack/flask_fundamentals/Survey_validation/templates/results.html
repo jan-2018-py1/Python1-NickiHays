@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Results</title>
+    </head>
+    <body>
+        <h1>Submitted Info</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <p>Name: {{name}}</p>
+        <p>Location: {{location}}</p>
+        <p>Favorite Language: {{language}}</p>
+        <p>Comments: {{comment}}</p>
+    </body>
+</html>
