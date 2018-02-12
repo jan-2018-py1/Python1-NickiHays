@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Success</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <h2>{{ message }}</h2>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h1>Email Addresses Entered:</h1>
+        {% for user in all_users %}
+            <p>{{ user['email'] }} {{ user['created_at'] }}</p>
+        {% endfor %}
+        <form action="/delete" method="POST">
+            <input type='submit' value='Delete Email'>
+        </form>
+    </body>
+</html>

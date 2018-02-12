@@ -1,0 +1,41 @@
+#wrapper{
+    width: 1024px;
+    padding: 20px;
+}
+
+#add{
+    width: 280px;
+    border: 2px solid black;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 5px, 5px, 5px, 5px;
+}
+input{
+    display:block;
+}
+
+.button{
+    display: block;
+}
+
+#log{
+    width: 300px;
+    border: 2px solid black;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 5px, 5px, 5px, 5px;
+}
+
+
+#welcome{
+    width: 900px;
+    border-bottom: 5px solid black;
+}
+
+.m_content{
+    font-size: 12pt;
+
+}
+.c_content{
+    font-size: 12pt;
+}

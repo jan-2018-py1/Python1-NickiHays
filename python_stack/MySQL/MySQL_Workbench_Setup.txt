@@ -1,0 +1,15 @@
+SELECT * FROM users;
+SELECT * FROM faves;
+SELECT * FROM follows;
+SELECT * FROM tweets;
+SELECT first_name FROM users;
+SELECT * FROM users WHERE first_name LIKE "%e" ORDER BY birthday DESC;
+INSERT INTO `twitter`.`users` (`first_name`, `last_name`,`created_at`, `updated_at`) 
+VALUES ('Buggs', 'Bunny', now(), now());
+SELECT * FROM users;
+DELETE FROM `twitter`.`users` WHERE id = 6;
+DELETE FROM `twitter`.`users` WHERE id = 7;
+SELECT * FROM users
+JOIN tweets ON users.id = tweets.user_id;
+SELECT * FROM users
+LEFT JOIN tweets ON users.id = tweets.user_id;

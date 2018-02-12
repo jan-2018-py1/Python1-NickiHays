@@ -1,0 +1,51 @@
+1) ‘host’: ‘local’,
+ERROR: none
+
+2) ‘database’: friendsdb,
+ERROR:   File "server.py", line 4, in <module>
+    mysql = MySQLConnector(app,'friendsdb')
+  File "C:\Users\Shannon\Desktop\Python\python_stack\flask_MySQL\friends\mysqlconnection.py", line 40, in MySQLConnector
+    return MySQLConnection(app, db)
+  File "C:\Users\Shannon\Desktop\Python\python_stack\flask_MySQL\friends\mysqlconnection.py", line 9, in __init__
+    'database': friendsdb, # we got db as an argument
+NameError: global name 'friendsdb' is not defined
+FIX: must be db for database
+
+3) ‘database’: ‘db’,
+ERROR: OperationalError: (_mysql_exceptions.OperationalError) (1049, "Unknown database 'db'") (Background on this error at: http://sqlalche.me/e/e3q8)
+FIX: make sure db is used as a variable, no ‘ ‘
+
+4) ‘user’: ‘ro0ot’
+ERROR: OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'ro0ot'@'localhost' (using password: YES)") (Background on this error at: http://sqlalche.me/e/e3q8)
+FIX: make sure user is spelled correctly
+
+5) ‘user : ‘root’
+ERROR:  File "server.py", line 2, in <module>
+    from mysqlconnection import MySQLConnector
+  File "C:\Users\Shannon\Desktop\Python\python_stack\flask_MySQL\friends\mysqlconnection.py", line 10
+    'user: 'root',
+               ^
+FIX: make sure to have the single quotations on both sides of the words
+
+6) ‘pssword’: ‘root’ 
+ERROR: Traceback (most recent call last):
+  File "server.py", line 4, in <module>
+    mysql = MySQLConnector(app,'friendsdb')
+  File "C:\Users\Shannon\Desktop\Python\python_stack\flask_MySQL\friends\mysqlconnection.py", line 40, in MySQLConnector
+    return MySQLConnection(app, db)
+  File "C:\Users\Shannon\Desktop\Python\python_stack\flask_MySQL\friends\mysqlconnection.py", line 15, in __init__
+    DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+KeyError: 'password'
+FIX: make sure the word password is spelled correctly
+
+7) ‘password’: ‘123’ 
+ERROR: OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: YES)") (Background on this error at: http://sqlalche.me/e/e3q8)
+FIX: make sure to use the password that was initially set
+
+8) ‘port’: ‘3205’ 
+ERROR: OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' (10061)") (Background on this error at: http://sqlalche.me/e/e3q8)
+FIX: make sure the port is set to the correct assigned port (3306 is standard)
+
+
+
+

@@ -1,0 +1,72 @@
+-- 1) What query would you run to get the total revenue for Mar of 2012?
+SELECT MONTHNAME(charged_datetime) as month, sum(amount) as revenue FROM billing
+WHERE YEAR(charged_datetime) = 2012 and MONTH(charged_datetime) = 03;
+
+-- 2) What query would you run to get total rev collected from client with id = 2?
+SELECT clients.client_id, clients.first_name, clients.last_name, sum(billing.amount) as revenue FROM billing
+JOIN clients ON billing.client_id = clients.client_id
+WHERE clients.client_id = 2;
+
+-- 3) What query would you run to get all the sites that client = 10 owns?
+SELECT clients.client_id, sites.domain_name as sites FROM clients
+JOIN sites ON clients.client_id = sites.client_id
+WHERE clients.client_id = 10;
+
+-- 4) What query would you run to get total # of sites created per month per year for client with id = 1? What about for client = 20?
+SELECT client_id, COUNT(site_id) as sites, MONTHNAME(created_datetime) as month, YEAR(created_datetime) as year FROM sites
+WHERE client_id = 1
+GROUP BY MONTHNAME(created_datetime), YEAR(created_datetime)
+ORDER BY YEAR(created_datetime) ASC;
+
+SELECT client_id, COUNT(site_id) as sites, MONTHNAME(created_datetime) as month, YEAR(created_datetime) as year FROM sites
+WHERE client_id = 20
+GROUP BY MONTHNAME(created_datetime), YEAR(created_datetime)
+ORDER BY YEAR(created_datetime) ASC;
+
+-- 5) What query would you run to get total # of leads generated for each of the sites between 1-1-11 to 2-15-11?
+SELECT sites.domain_name as site, COUNT(leads.leads_id) as number_of_leads, DATE(leads.registered_datetime) as registered_date FROM leads
+LEFT JOIN sites ON leads.site_id = sites.site_id
+WHERE leads.registered_datetime BETWEEN '2011-01-01' and '2011-02-15'
+GROUP BY sites.domain_name;
+
+-- 6) What query would you run to get a list of client names & total # of leads we've generated for each of our clients between 1-1-11 to 12-31-11?
+SELECT clients.first_name, clients.last_name, COUNT(leads.leads_id) as leads FROM clients
+LEFT JOIN sites ON clients.client_id = sites.client_id
+LEFT JOIN leads ON sites.site_id = leads.site_id
+WHERE leads.registered_datetime BETWEEN '2011-01-01' and '2011-12-31'
+GROUP BY clients.client_id
+ORDER BY clients.client_id;
+
+-- 7) What query would you run to get a list of client names & total # of leads we've generated for each client each month between months 1-6 of year 2011?
+SELECT concat(clients.first_name, "", clients.last_name) as client, COUNT(leads.leads_id) as leads, MONTHNAME(leads.registered_datetime) as month, YEAR(leads.registered_datetime) as year FROM clients
+LEFT JOIN sites ON clients.client_id = sites.client_id
+LEFT JOIN leads ON sites.site_id = leads.site_id
+WHERE DATE(leads.registered_datetime) >= '2011-01-01' and DATE(leads.registered_datetime) <= '2011-06-30'
+GROUP BY concat(clients.first_name, "", clients.last_name), MONTHNAME(leads.registered_datetime)
+ORDER BY clients.client_id;
+
+-- 8) What query would you run to get list of client names & total # of leads generated for each clients' sites between 1-1-11 to 12-31-11? Order this query by client id. Come up with a second query that shows all the  clients, site names, & total # of leads generated from each site for all time
+SELECT concat(clients.first_name, "", clients.last_name) as client, sites.domain_name, COUNT(leads.leads_id) as leads, MONTHNAME(leads.registered_datetime) as month, YEAR(leads.registered_datetime) as year FROM clients
+LEFT JOIN sites ON clients.client_id = sites.client_id
+LEFT JOIN leads ON sites.site_id = leads.site_id
+WHERE DATE(leads.registered_datetime) >= '2011-01-01' and DATE(leads.registered_datetime) <= '2011-12-31'
+GROUP BY concat(clients.first_name, "", clients.last_name), sites.domain_name
+ORDER BY clients.client_id;
+
+SELECT concat(clients.first_name, "", clients.last_name) as client, sites.domain_name, COUNT(leads.leads_id) as leads FROM clients
+LEFT JOIN sites ON clients.client_id = sites.client_id
+LEFT JOIN leads ON sites.site_id = leads.site_id
+GROUP BY concat(clients.first_name, "", clients.last_name), sites.domain_name
+ORDER BY clients.client_id, COUNT(leads.leads_id) DESC;
+
+-- 9) Write a single query that retrieves total revenue collected from each client for each month of the year. Order is by client id
+SELECT concat(clients.first_name, "", clients.last_name) as clients, sum(billing.amount) as revenue, MONTHNAME(billing.charged_datetime) as month, YEAR(billing.charged_datetime) as year FROM clients
+JOIN billing ON clients.client_id = billing.client_id
+GROUP BY billing.client_id, MONTHNAME(billing.charged_datetime), YEAR(billing.charged_datetime)
+ORDER BY clients.client_id, DATE(billing.charged_datetime);
+
+-- 10) Write a single query that retrieves all the sites that each client owns. Group the results so that each row shows a new client. It will become clearer when you add a new field called 'sites' that has all the sites that the client owns. (HINT: use GROUP_CONCAT)
+SELECT concat(clients.first_name, ' ', clients.last_name) as client, group_concat(' ', sites.domain_name separator '/') as sites FROM clients
+LEFT JOIN sites ON clients.client_id = sites.client_id
+GROUP BY sites.client_id
+ORDER BY clients.client_id;
