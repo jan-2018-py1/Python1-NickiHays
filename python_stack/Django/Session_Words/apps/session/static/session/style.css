@@ -14,7 +14,11 @@
 
 }
 
-span{
+#session{
+    color: black;
+    font-weight: normal;
+}
+#text{
     color: black;
     font-weight: normal;
 }

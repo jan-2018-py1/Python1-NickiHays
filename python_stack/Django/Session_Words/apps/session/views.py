@@ -25,6 +25,8 @@ def create(request):
 
     data = request.session['info']
     data.append(new_word)
+
+    request.session['info'] = data
     print data
     
     return render(request, 'session/index.html', new_word)
