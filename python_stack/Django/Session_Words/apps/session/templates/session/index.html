@@ -28,11 +28,9 @@
                     {% csrf_token %}
                     <input type='submit' value='Clear Session'>
                 </form>
-                <ul style='list-style-type:none'>
-                    {% for info in request.session.info %}
-                        <li style='color: {{info.color}}; font-weight:{{info.bold}};'>{{info.word}} <span id='text'>- added on {{info.time}}</span></li>
-                    {% endfor %}
-                </ul>
+                {% for info in request.session.info %}
+                    <p style='color: {{info.color}}; font-weight:{{info.bold}};'>{{info.word}} <span>- added on {{info.time}}</span></p> 
+                {% endfor %}
             </div>
         </div>
     </body>
