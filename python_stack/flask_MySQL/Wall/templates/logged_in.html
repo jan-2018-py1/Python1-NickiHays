@@ -25,9 +25,9 @@
                     <h3>{{ message.poster_fname }} {{message.poster_lname }} - {{ message.message_date }}</h3>
                     <p class='m_content'>{{ message.message }}</p>
                     {% for comment in comments %}
-                        {% if (comment.message_id == message.message_id) %}
+                        {% if (comment.comment_message_id == message.message_id) %}
                             <h4>{{ comment.commenter_fname }} {{ comment.commenter_lname }} - {{ comment.comment_date }}</h4>
-                            <p class='c_content'>{{ comment }}</p>
+                            <p class='c_content'>{{ comment['comment'] }}</p>
                         {% endif %}
                     {% endfor %}
                     <form action='/comments' method='POST'>

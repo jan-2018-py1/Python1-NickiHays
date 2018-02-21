@@ -1,0 +1,18 @@
+#wrapper{
+    width: 1024px;
+    content: center;
+}
+ #text{
+    width: 400px;
+    text-align: center;
+    border: 2px solid black;
+    margin-left: 200px;
+ }
+.line{
+    width: 500px;
+    border: 2px solid black;
+    font-size: 30pt;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 150px;
+}

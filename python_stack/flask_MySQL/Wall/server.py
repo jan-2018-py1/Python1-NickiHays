@@ -60,9 +60,10 @@ def wall():
     queryMessages = "SELECT users.id as poster_id, users.first_name as poster_fname, users.last_name as poster_lname, messages.id as message_id, messages.message as message, DATE_FORMAT(messages.created_at, '%M %e, %Y %h:%i %p') as message_date FROM users JOIN messages ON users.id = messages.user_id ORDER BY messages.id DESC"
     messages = mysql.query_db(queryMessages)
 
-    queryComments = "SELECT users.id as commenter_id, users.first_name as commenter_fname, users.last_name as commenter_lname, comments.comment as comment, DATE_FORMAT(comments.created_at, '%M %e, %Y %h:%i %p') as comment_date FROM users JOIN comments ON users.id = comments.user_id ORDER BY comments.id DESC"
+    queryComments = "SELECT users.id as commenter_id, users.first_name as commenter_fname, users.last_name as commenter_lname, comments.message_id as comment_message_id, comments.comment as comment, DATE_FORMAT(comments.created_at, '%M %e, %Y %h:%i %p') as comment_date FROM users JOIN comments ON users.id = comments.user_id ORDER BY comments.id DESC"
     comments = mysql.query_db(queryComments)
-    
+
+
     return render_template("logged_in.html", messages = messages, comments = comments)
 
 @app.route('/messages', methods=['POST'])

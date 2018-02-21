@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Session Words</title>
+            {% load static %}
+        <link rel='stylesheet' href='{% static "session/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div id='addword'>
+                <h1>Add a new word</h1>
+                <form action='/create' method='post'>
+                    {% csrf_token %}
+                    <input type='text' name='word'><br>
+                    Choose Color:<br>
+                        <input type='radio' name='color' value='red'>Red<br>
+                        <input type='radio' name='color' value ='green'>Green<br>
+                        <input type='radio' name='color' value='blue'>Blue<br>
+                    <input type='checkbox' name='bold' value='bold'>Show in BIG fonts!
+                    <input type='submit' value='Add to Session'>
+                </form>
+            </div>
+            <div id='session'>
+                <form action='/reset' method='post'>
+                    {% csrf_token %}
+                    <input type='submit' value='Clear Session'>
+                </form>
+                <ul style='list-style-type:none'>
+                    {% for info in request.session.info %}
+                        <li style='color: {{info.color}}; font-weight:{{info.bold}};'>{{info.word}} <span id='text'>- added on {{info.time}}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

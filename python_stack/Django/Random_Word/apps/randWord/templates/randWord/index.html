@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf=8'>
+        <title>Random Word</title> 
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'randWord/style.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h1>Random Word</h1>
+            <h2>Attempt # {{ request.session.attempt }}</h2>
+            <div id='forma'>
+                <form action='/create' method='post'>
+                    {% csrf_token %}
+                    <p>{{ rand }}</p>
+                    <input type='submit' value='Generate'>
+                </form>
+            </div>
+            <div id='form2'>
+                <form action='/reset' method='post'>
+                    {% csrf_token %}
+                    <input type='submit' value='Reset'>
+                </form>
+            </div>
+        </div>
+    </body>

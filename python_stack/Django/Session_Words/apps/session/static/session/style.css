@@ -1,0 +1,20 @@
+#wrapper{
+    width: 1024px;
+}
+
+#addword{
+    width: 500px;
+    display: inline-block;
+}
+
+#session{
+    width: 500px;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+#text{
+    color: black;
+    font-weight: normal;
+}

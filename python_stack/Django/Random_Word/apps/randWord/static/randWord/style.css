@@ -1,0 +1,9 @@
+p {
+    border: 2px solid black;
+    font-size: 20pt;
+    width: 500px;
+    height: 75px;
+}
+#wrapper {
+    width: 1024px;
+}

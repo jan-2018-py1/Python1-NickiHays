@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <title>Survey Form</title>
+            {% load static %}
+        <link rel='stylesheet' href='{% static "survey/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div id='form'>
+                <form action='/surveys/process' method='post'>
+                    {% csrf_token %}
+                    Your Name: <input type='text' name='name'>
+                    Dojo Location: <select name='location'>
+                        <option value='Silicon Valley'>Silicon Valley</option>
+                        <option value='Seattle'>Seattle</option>
+                        <option value='Los Angeles'>Los Angeles</option>
+                        <option value='Dallas'>Dallas</option>
+                        <option value='Chicago'>Chicago</option>
+                        <option value='Tulsa'>Tulsa</option>
+                        <option value='Washington DC'>Washington D.C.</option>
+                    </select>
+                    Favorite Language: <select name='language'>
+                        <option value='Python'>Python</option>
+                        <option value='Javascript'>JavaScript</option>
+                        <option value='HTML'>HTML</option>
+                        <option value='CSS'>CSS</option>
+                        <option value='Django'>Django</option>
+                    </select>
+                    Comment (optional): <textarea name='comment' rows='6' cols='30'></textarea>
+                    <input type='submit' name='submit' value='Submit'>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
