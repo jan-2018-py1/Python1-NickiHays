@@ -38,8 +38,8 @@ def login(request):
             messages.error(request, error, extra_tags=tag)
         return redirect('/')
     else:
-        login_user = User.objects.get(email=request.POST['email'])[0]
-        name = login_user['first_name']
+        login_user = User.objects.filter(email=request.POST['email'])
+        name = login_user[0]['first_name']
         request.session['name'] = name
         return redirect('/success')
 
