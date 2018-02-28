@@ -30,20 +30,6 @@ class UserManager(models.Manager):
         return password
 
     def login_validator(self, postData):
-#        errors = {}
-#        for key in postData:
-#            if postData[key] == '':
-#                errors['empty_field'] = 'All fields are required for login'
-#            return errors
-        
-#        current_user = User.objects.filter(email=postData['email'])
-
-#        try:
-#            if not bcrypt.checkpw(postData['password'].encode(), current_user[0].password.encode()):
-#                errors['loginfail'] = 'Login info does not match database- please try again or please register'
-#        except:
-#           errors['loginfail'] = 'Login info does not match database- please try again or please register'
-#        return errors
         errors = {}
         for key in postData:
             if postData[key] == '':

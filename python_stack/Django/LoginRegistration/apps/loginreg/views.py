@@ -32,6 +32,7 @@ def add(request):
         return redirect('/success')
 
 def login(request):
+    print request.POST
     errors = User.objects.login_validator(request.POST)
     if len(errors):
         for tag, error in errors.iteritems():
@@ -39,9 +40,13 @@ def login(request):
         return redirect('/')
     else:
         login_user = User.objects.filter(email=request.POST['email'])
-        name = login_user[0]['first_name']
-        request.session['name'] = name
-        return redirect('/success')
+        if len(login_user) > 0:
+            name = login_user[0].first_name
+            request.session['name'] = name
+            return redirect('/success')
+        else:
+            messages.error(request, 'Login info does not match database- please try again or please register')
+            return redirect('/')
 
 def logout(request):
     request.session.clear()
