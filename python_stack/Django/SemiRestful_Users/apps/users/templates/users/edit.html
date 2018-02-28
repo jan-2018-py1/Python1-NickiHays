@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Semi-Restful Users</title>
+            {% load static %}
+        <link rel='stylesheet' href='{% static "users/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h1>Edit User {{ user.id }}</h1>
+            <div id='form'>
+                <form action='/users/update' method='post'>
+                    {% csrf_token %}
+                    First Name: <input type='text' name='first_name'>
+                    Last Name: <input type='text' name='last_name'>
+                    Email: <input type='text' name='email'>
+                    <input type='submit' value='Update'>
+                </form>
+                <a href='/users/{{user.id}}'>Show</a>
+                <a href='/users'>Go Back</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Amadon</title>
+            {% load static %}
+        <link rel='stylesheet' href='{% static "amadon_app/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h2>Thank you for your business!</h2>
+            <p>We charged your credit card ${{request.session.purchase_cost}}.</p>
+            <br>
+            <p>You have ordered {{request.session.item_count}} items so far and spent ${{request.session.total_cost}} with Amadon.com!</p>
+            <a href='/amadon/return'>Go Back</a>
+        </div>
+    </body>
+</html>

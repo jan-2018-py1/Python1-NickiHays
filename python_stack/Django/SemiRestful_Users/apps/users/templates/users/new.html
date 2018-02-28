@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Semi-Restful Users</title>
+            {% load static %}
+        <link rel='stylesheet' href='{% static "users/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h1>Add a new user</h1>
+            <div id='form'>
+                <form action='/users/create' method='Post'>
+                    {% csrf_token %}
+                    First Name: <input type='text' name='fname'>
+                    Last Name: <input type='text' name='lname'>
+                    Email: <input type='text' name='emailaddress'>
+                    <input type='submit' value='Create'>
+                    <a href='/users'>Go Back</a>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

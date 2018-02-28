@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        {% load static %}
+        <link rel='stylesheet' href='{% static "loginreg/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            {% if messages %}
+            <ul class='messages'>
+                {% for message in messages %}
+                <li {% if message.tags %} class='{{message.tags}}' {% endif %}>Please Note: {{message}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div id='register'> 
+                <h2>Register</h2>
+                <form action="/add" method="POST">
+                    {% csrf_token %}
+                    First Name: <input type='text' name='first_name'>
+                    Last Name:  <input type='text' name='last_name'>
+                    Email Address: <input type='text' name='email'>
+                    Password: <input type='password' name='password'>
+                    Confirm Password: <input type='password' name='confirm'>
+                    <input type='submit' value='Submit'>
+                </form>
+            </div>
+            <div id='login'>
+                <h2>Login Here</h2>
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    Email:<input type='text' name='email'>
+                    Password:<input type='password' name='password'>
+                    <input type='submit' value='Submit'>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
