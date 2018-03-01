@@ -6,7 +6,7 @@ from .models import *
 from django.contrib import messages
 
 def books(request):
-    user = User.objects.get(id=request.session['id'])
+    user = User.objects.get(id=request.session['user_id'])
     books = Book.objects.all()
     last_three = Review.objects.all().order_by('-created_at')[:3]
     content = {
@@ -48,20 +48,25 @@ def books_create(request):
     
     Review.objects.create(
         book = Book.objects.get(id=new_book.id),
-        user = User.objest.get(id=request.session['user_id']),
+        user = User.objects.get(id=request.session['user_id']),
         content = request.POST['book_review'],
         stars = request.POST['rating']
     )
+    request.session['book_id'] = new_book.id
+    url = '/books/{}'.format(new_book.id)
 
-    return redirect('/books/{{new_book.id}}')
+    return redirect(url)
 
 def books_info(request, book_id):
     if Book.objects.filter(id=book_id).exists():
         current_book = Book.objects.get(id=book_id)
     else:
         return redirect('/books')
+
+
     content = {
         'current_book': current_book.title,
+        'author': Author.objects.get(books=current_book.id).name,
         'book_id': current_book.id,
         'reviews': Review.objects.filter(book=current_book),
         'books': Book.objects.all(),
@@ -72,14 +77,15 @@ def books_info(request, book_id):
 def reviews_create(request):
     if 'user_id' not in request.session:
         return redirect('/')
-
+    book_id = Book.objects.get(id=request.POST['book_id'])
     Review.objects.create(
-        book = Book.objects.get(id=book_id),
+        book = book_id,
         user = User.objects.get(id=request.session['user_id']),
         content = request.POST['review'],
         stars = request.POST['rating']
     )
-    return redirect('/books/{{book_id}}')
+    url = '/books/{}'.format(request.POST['book_id'])
+    return redirect(url)
 
 def reviews_delete(request, review_id):
     x = Review.objects.get(id=review_id)
@@ -93,9 +99,9 @@ def user_info(request, user_id):
         return redirect('/')
     info = {
         'alias': user.alias,
-        'name': user.first_name + user.last_name,
+        'name': user.first_name + " " + user.last_name,
         'email': user.email,
         'reviews': len(user.reviews.all()),
         'books': user.reviews.all()
     }
-    return render(request, 'users/user_info.html', info)
+    return render(request, 'books/user_info.html', info)

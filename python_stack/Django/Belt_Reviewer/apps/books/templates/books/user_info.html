@@ -24,7 +24,7 @@
             <div id='reviewinfo'>
                 <p>Posted Reviews on the following books:</p>
                 {% for review in books %}
-                    <a href='/books/{{review.book.id}}'>{{review.book.title}}</a>
+                    <p><a href='/books/{{review.book.id}}'>{{review.book.title}}</a></p>
                 {% endfor %}
             </div>
         </div>
