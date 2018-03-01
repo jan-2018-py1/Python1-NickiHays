@@ -45,8 +45,10 @@ def login(request):
         login_user = User.objects.filter(email=request.POST['email'])
         if len(login_user) > 0:
             alias = login_user[0].alias
+            user_id = login_user[0].id
+            request.session['user_id'] = user_id
             request.session['alias'] = alias
-            return redirect('/success')
+            return redirect('/books')
         else:
             messages.error(request, 'Login info does not match database- please try again or please register')
             return redirect('/')

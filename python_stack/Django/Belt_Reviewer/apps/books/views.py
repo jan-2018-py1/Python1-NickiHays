@@ -88,9 +88,12 @@ def reviews_create(request):
     return redirect(url)
 
 def reviews_delete(request, review_id):
+    y = Review.objects.get(id=review_id).book.id
     x = Review.objects.get(id=review_id)
     x.delete()
-    return redirect('/books/{{book_id}}')
+    
+    url = '/books/{}'.format(y)
+    return redirect(url)
 
 def user_info(request, user_id):
     if User.objects.filter(id=user_id).exists():
