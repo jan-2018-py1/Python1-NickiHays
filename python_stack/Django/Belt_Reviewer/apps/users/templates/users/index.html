@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        {% load static %}
+        <link rel='stylesheet' href='{% static "users/style.css" %}' media='screen' title='no title' charset='utf-8'>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h1>Welcome!</h1>
+            {% if messages %}
+            <ul class='messages'>
+                {% for message in messages %}
+                <li {% if message.tags %} class='{{message.tags}}' {% endif %}>Please Note: {{message}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div id='register'>
+                <h2>Register</h2>
+                <form action='/register' method='post'>
+                    {% csrf_token %}
+                    First Name: <input type='text' name='fname'>
+                    Last Name: <input type='text' name='lname'>
+                    Alias: <input type='text' name='alias'>
+                    Email: <input type='text' name='email'>
+                    Password: <input type='password' name='password'>
+                    <p>*Password should be at least 8 characters</p>
+                    Confirm PW: <input type='password' name='confirm'>
+                    <input type='submit' value='Register'>
+                </form>
+            </div>
+            <div id='login'>
+                <h2>Login</h2>
+                <form action='/login' method='post'>
+                    {% csrf_token %}
+                    Email: <input type='text' name='email'>
+                    Password: <input type='password' name='password'>
+                    <input type='submit' value='Login'>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
