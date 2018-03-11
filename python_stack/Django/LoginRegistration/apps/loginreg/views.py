@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect, HttpResponse
-from .models import *
 from django.contrib import messages
+from .models import *
 
 def index(request):
     if 'id' not in request.session:

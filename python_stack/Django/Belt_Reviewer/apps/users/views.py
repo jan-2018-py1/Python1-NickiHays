@@ -12,8 +12,8 @@ def index(request):
         return redirect('/books')
 
 def register(request):
-    if 'user_id' not in request.session:
-        request.session['user_id'] = ''
+    if 'user_id' in request.session:
+        return redirect('/books')
     
     errors = User.objects.validator(request.POST)
     if len(errors):
