@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+</head>
+<body>
+    <div id='wrapper'>
+        <h1>My Posts</h1>
+
+        <div id='posts'></div>
+        
+        <h4>Add a note:</h4>
+        <form action='/create' method='post' id='create_post'>
+            {% csrf_token %}
+            <textarea name='content' rows='10' cols='30'></textarea>
+            <input type='submit' value='Post It!'>
+        </form>
+
+        <script>
+            $('#create_post').submit(function(e){
+                e.preventDefault()
+                console.log('Sending Ajax request to', $(this).attr('action'))
+                console.log('Submitting the following data', $(this).serialize())
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'post',
+                    data: $(this).serialize(),
+                    success: function(serverResponse) {
+                        console.log('success', serverResponse)
+                        $('#posts').html(serverResponse)
+                    }
+                })
+            });
+        </script>
+    </div>
+</body>
+</html>

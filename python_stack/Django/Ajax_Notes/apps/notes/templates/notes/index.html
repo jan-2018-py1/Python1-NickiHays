@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+</head>
+<body>
+    <h2>Notes</h2>
+
+    <div id='notes'>
+
+    </div>
+
+    <form action='/create' method='post' id='create_note'>
+        {% csrf_token %}
+        <input type='text' name='title' value='Insert note title here...'>
+        <textarea name='content' rows='10' cols='30'>Description</textarea>
+        <input type='submit' value='Add Note'>
+    </form>
+
+    <script>
+        $('#create_note').submit(function(e){
+            e.preventDefault()
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    console.log('success', serverResponse)
+                    $('#notes').html(serverResponse) 
+                }
+            })
+        })
+    </script>
+
+    <script>
+        $('#delete').submit(function(e){
+            e.preventDefault()
+            console.log('delete button clicked')
+            $.ajax({
+                url: '/delete/{{note.id}}',
+                success: function(serverResponse) {
+                    console.log("success", serverResponse)
+                   
+                }
+            })
+        })
+    </script>
+
+    <script>
+        $('#edit').hover(function(e){
+            e.preventDefault()
+            console.log('edit clicked')
+            $.ajax({
+                url: '/edit/{{note.id}}',
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    console.log("success", serverResponse)
+                    $('#notes').html(serverResponse)
+                }
+            })
+        })
+    </script>
+</body>
+</html>

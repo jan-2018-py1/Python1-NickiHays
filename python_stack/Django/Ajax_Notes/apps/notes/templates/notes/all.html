@@ -1,0 +1,12 @@
+
+<div style='border-top: 1px solid silver; border-bottom: 1px solid silver;'>
+    {% for note in notes %}
+    <h4>{{note.title}}</h4>
+    <textarea style='overflow:auto;' rows='10' cols='30'>{{note.content}}</textarea>
+    <button id='delete' style='padding:5px; margin:5px; font-weight:bold; color:blue;'>delete</button>
+    <a href='/edit/{{note.id}}' id='edit' style='padding:5px; margin:5px; font-weight:bold; color:blue;'>edit</button>
+    {% endfor %}
+</div>
+
+
+
